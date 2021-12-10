@@ -1,32 +1,36 @@
 import React from 'react';
 
 function MedicalTreatmentPanel() {
-  const [items, setItems] = React.useState([]);
   const [treatId, setTreatId] = React.useState('');
   const [treatCourseId, setTreatCourseId] = React.useState('');
   const [type, setType] = React.useState('');
   const [category, setCategory] = React.useState('');
   const [name, setName] = React.useState('');
   const [startDate, setStartDate] = React.useState('');
+  const [newTreatmentsArray, setNewTreatmentsArray] = React.useState([]);
 
-  const eventHandler = () => {
-    setItems([
-      ...items,
+  const addTreatment = () => {
+    setNewTreatmentsArray([
+      ...newTreatmentsArray,
       [
         treatId,
-        ' ',
+        ' - ',
         treatCourseId,
-        ' ',
+        ' - ',
         type,
-        ' ',
+        ' - ',
         category,
-        ' ',
+        ' - ',
         name,
-        ' ',
+        ' - ',
         startDate,
       ],
     ]);
   };
+
+  const newTreatments = newTreatmentsArray.map((treatmentItem) => (
+    <li>{treatmentItem}</li>
+  ));
 
   return (
     <div>
@@ -65,13 +69,10 @@ function MedicalTreatmentPanel() {
         value={startDate}
         onChange={(event) => setStartDate(event.target.value)}
       />
-      <button onClick={eventHandler}> Click </button>
+      <button onClick={addTreatment}> NEW TREATMENT </button>
       <br />
-      <div>
-        {items.map((item) => (
-          <li>{item}</li>
-        ))}
-      </div>
+      <br />
+      {newTreatments}
     </div>
   );
 }
